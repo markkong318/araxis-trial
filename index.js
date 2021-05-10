@@ -20,14 +20,14 @@ const sleep = require('await-sleep');
   console.log('Accessing evaluation page...');
   const page_araxis = await browser.newPage();
   await page_araxis.goto('https://logic.araxis.com/CustomerSupport/MergeEvaluationF.xml');
-  await page_araxis.waitFor('#R_MergeEvaluationFd0e311');
+  await page_araxis.waitForSelector('#R_MergeEvaluationFd0e311');
   await page_araxis.type('#R_MergeEvaluationFd0e311', mail_address);
   await page_araxis.click('#C_MergeEvaluationFd0e358');
 
   console.log('Checking mail...');
   let next_url = '';
   let retry = 0;
-  const max_retry = 60;
+  const max_retry = 300;
   while (!next_url) {
     next_url = await page_mail.evaluate(() => {
       const node_list = document.querySelectorAll('#mailbox a');
@@ -58,7 +58,7 @@ const sleep = require('await-sleep');
   }
 
   await page_mail.goto(next_url);
-  await page_mail.waitFor('.mailinhtml');
+  await page_mail.waitForSelector('.mailinhtml');
   const mail = await page_mail.$eval('.mailinhtml', el => el.innerHTML);
 
   //Mail example:
