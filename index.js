@@ -1,8 +1,11 @@
 const colors = require('colors');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
 const sleep = require('await-sleep');
 
 (async () => {
+  const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+  puppeteer.use(StealthPlugin())
+
   const browser = await puppeteer.launch({
     headless: true,
     args: ['--lang=en-US']
