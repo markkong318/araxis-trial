@@ -23,9 +23,9 @@ const sleep = require('await-sleep');
   console.log('Accessing evaluation page...');
   const page_araxis = await browser.newPage();
   await page_araxis.goto('https://logic.araxis.com/CustomerSupport/MergeEvaluationF.xml');
-  await page_araxis.waitForSelector('#R_MergeEvaluationFd0e311');
-  await page_araxis.type('#R_MergeEvaluationFd0e311', mail_address);
-  await page_araxis.click('#C_MergeEvaluationFd0e358');
+  await page_araxis.waitForSelector('input[title="Enter your email address here"]');
+  await page_araxis.type('input[title="Enter your email address here"]', mail_address);
+  await page_araxis.click('input[title="Submit this form"]');
 
   console.log('Checking mail...');
   let next_url = '';
